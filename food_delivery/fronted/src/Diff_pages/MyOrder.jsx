@@ -45,12 +45,14 @@ export default function MyOrder() {
         {orderData.length > 0 ? (
           <div className="row">
             {orderData.slice(0).reverse().map((order) => (
+             
               <div key={order._id} className="col-12 col-md-6 col-lg-3 mb-4">
+                
                 <div className="card h-100">
                   <img
-                    src={order.img || 'placeholder.jpg'} // Add a placeholder if img is missing
+                    src={order.img || 'placeholder.jpg'}
                     className="card-img-top"
-                    alt={order.name || 'Food item'} // Ensure alt is set correctly
+                    alt={order.name || 'Food item'}
                     style={{ height: '200px', objectFit: 'cover' }}
                   />
                   <div className="card-body">

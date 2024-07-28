@@ -1,25 +1,32 @@
 import React, { createContext, useContext, useReducer } from 'react';
 
+
 const CartStateContext = createContext();
 const CartDispatchContext = createContext();
+
 
 const reducer = (state, action) => {
   switch (action.type) {
     case 'ADD': {
-      const itemIndex = state.findIndex(item => item.id === action.id && item.Size === action.Size);
+      const { id, name, price, img, Qty, Size } = action;
+      const itemIndex = state.findIndex(item => item.id === id && item.Size === Size);
+
       if (itemIndex >= 0) {
-        const newState = state.map((item, index) =>
-          index === itemIndex ? { ...item, Qty: item.Qty + action.Qty } : item
+      
+        return state.map((item, index) =>
+          index === itemIndex ? { ...item, Qty: item.Qty + Qty } : item
         );
-        return newState;
       } else {
-        return [...state, { id: action.id, name: action.name, price: action.price, img: action.img, Qty: action.Qty, Size: action.Size }];
+        
+        return [...state, { id, name, price, img, Qty, Size }];
       }
     }
     case 'REMOVE': {
-      return state.filter((item, index) => index !== action.index);
+    
+      return state.filter((_, index) => index !== action.index);
     }
     case 'DROP': {
+     
       return [];
     }
     default: {
@@ -28,6 +35,7 @@ const reducer = (state, action) => {
     }
   }
 };
+
 
 export const ContextApi = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, []);
@@ -41,6 +49,7 @@ export const ContextApi = ({ children }) => {
   );
 };
 
+
 export const useCart = () => {
   const context = useContext(CartStateContext);
   if (context === undefined) {
@@ -48,6 +57,7 @@ export const useCart = () => {
   }
   return context;
 };
+
 
 export const useDispatchCart = () => {
   const context = useContext(CartDispatchContext);
