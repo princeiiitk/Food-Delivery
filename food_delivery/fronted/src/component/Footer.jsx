@@ -1,55 +1,78 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import '../App.css'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import '../App.css';
 
 export default function Footer() {
   return (
-    <>
-      <div>
-        <footer className="bg-dark text-center text-white">
+    <footer className="bg-dark text-center text-white">
+      <div className="container p-4 pb-0">
+        <section className="mb-4">
+          <Link
+            className="btn btn-outline-light btn-floating m-1"
+            to={{ pathname: "https://www.facebook.com/" }}
+            target="_blank"
+            role="button"
+            aria-label="Facebook"
+          >
+            <i className="fab fa-facebook-f"></i>
+          </Link>
 
-          <div className="container p-4 pb-0">
+          <Link
+            className="btn btn-outline-light btn-floating m-1"
+            to={{ pathname: "https://twitter.com" }}
+            target="_blank"
+            role="button"
+            aria-label="Twitter"
+          >
+            <i className="fab fa-twitter"></i>
+          </Link>
 
-            <section className="mb-4">
+          <Link
+            className="btn btn-outline-light btn-floating m-1"
+            to={{ pathname: "https://www.google.com/" }}
+            target="_blank"
+            role="button"
+            aria-label="Google"
+          >
+            <i className="fab fa-google"></i>
+          </Link>
 
-              <Link className="btn btn-outline-light btn-floating m-1" target="_blank" to="https://www.facebook.com/" role="button"
-              ><i className="fab fa-facebook-f"></i
-              ></Link>
+          <Link
+            className="btn btn-outline-light btn-floating m-1"
+            to={{ pathname: "https://www.instagram.com/" }}
+            target="_blank"
+            role="button"
+            aria-label="Instagram"
+          >
+            <i className="fab fa-instagram"></i>
+          </Link>
 
+          <Link
+            className="btn btn-outline-light btn-floating m-1"
+            to={{ pathname: "https://www.linkedin.com/" }}
+            target="_blank"
+            role="button"
+            aria-label="LinkedIn"
+          >
+            <i className="fab fa-linkedin-in"></i>
+          </Link>
 
-              <Link className="btn btn-outline-light btn-floating m-1" target="_blank" to="https://twitter.com" role="button"
-              ><i className="fab fa-twitter"></i
-              ></Link>
-
-
-              <Link className="btn btn-outline-light btn-floating m-1" target="_blank" to="https://www.google.com/" role="button"
-              ><i className="fab fa-google"></i
-              ></Link>
-
-
-              <Link className="btn btn-outline-light btn-floating m-1" target="_blank" to="https://www.instagram.com/" role="button"
-              ><i className="fab fa-instagram"></i
-              ></Link>
-
-
-              <Link className="btn btn-outline-light btn-floating m-1" target="_blank" to="https://www.linkedin.com/" role="button"
-              ><i className="fab fa-linkedin-in"></i
-              ></Link>
-
-
-              <Link className="btn btn-outline-light btn-floating m-1" target="_blank" to="https://github.com/login" role="button"
-              ><i className="fab fa-github"></i
-              ></Link>
-            </section>
-
-          </div>
-
-          <div className="text-center p-3" style={{ "background-color": "rgba(0, 0, 0, 0.2)" }}>© 2020 Copyright:
-            <Link className="text-white" target="_blank" to="/Home">FooDY.com</Link>
-          </div>
-
-        </footer>
+          <Link
+            className="btn btn-outline-light btn-floating m-1"
+            to={{ pathname: "https://github.com/login" }}
+            target="_blank"
+            role="button"
+            aria-label="GitHub"
+          >
+            <i className="fab fa-github"></i>
+          </Link>
+        </section>
       </div>
-    </>
-  )
+
+      <div className="text-center p-3" style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}>
+       
+        <Link className="text-white" to="/Home" target="_blank"> FooDY.com</Link>
+      </div>
+    </footer>
+  );
 }

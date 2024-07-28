@@ -10,16 +10,16 @@ export default function MyOrder() {
 
   const fetchMyOrder = async () => {
     try {
-      const userEmailf = localStorage.getItem('useremail');
-      const response = await axios.post('https://fooddelivery-j1hz.onrender.com/myOrder', { email: userEmailf });
-      const json = response.data;
+      const userEmail = localStorage.getItem('useremail');
+      if (!userEmail) {
+        throw new Error('User email not found in local storage');
+      }
 
-      console.log('Fetched order data:', json); // Log the fetched data to verify structure
-
-      setOrderData(json);
+      const response = await axios.post('https://fooddelivery-j1hz.onrender.com/myOrder', { email: userEmail });
+      setOrderData(response.data);
       setLoading(false);
     } catch (error) {
-      console.error('Error fetching order data:', error); // Log any errors
+      console.error('Error fetching order data:', error);
       setError(error);
       setLoading(false);
     }
@@ -40,26 +40,35 @@ export default function MyOrder() {
   return (
     <>
       <Navbar />
-      <h1>Your Order</h1>
       <div className="container">
+        <h1 className="my-4">Your Orders</h1>
         {orderData.length > 0 ? (
-          orderData.slice(0).reverse().map((arrayData) => (
-            
-            <div key={arrayData._id} className="col-12 col-md-6 col-lg-3">
-              <div className="card mt-3" style={{ width: '18rem', maxHeight: '360px' }}>
-                <img src={arrayData.img} className="card-img-top" alt={arrayData.name} style={{ height: '30vh', objectFit: 'fill' }} />
-                <div className="card-body">
-                  <h5 className="card-title">{arrayData.name}</h5>
-                  <div className="container w-100 p-0" style={{ height: '50px' }}>
-                    <span className="m-1">Qty: {arrayData.Qty}</span>
-                    <span className="m-1">Size: {arrayData.Size}</span>
-                    <br />
-                    <div className="d-inline ms-2 h-100 w-20 fs-5">₹{arrayData.price}/-</div>
+          <div className="row">
+            {orderData.slice(0).reverse().map((order) => (
+              <div key={order._id} className="col-12 col-md-6 col-lg-3 mb-4">
+                <div className="card h-100">
+                  <img
+                    src={order.img || 'placeholder.jpg'} // Add a placeholder if img is missing
+                    className="card-img-top"
+                    alt={order.name || 'Food item'} // Ensure alt is set correctly
+                    style={{ height: '200px', objectFit: 'cover' }}
+                  />
+                  <div className="card-body">
+                    <h5 className="card-title">{order.name || 'Unnamed Item'}</h5>
+                    <p className="card-text">
+                      <strong>Quantity:</strong> {order.Qty || 'N/A'}
+                    </p>
+                    <p className="card-text">
+                      <strong>Size:</strong> {order.Size || 'N/A'}
+                    </p>
+                    <p className="card-text">
+                      <strong>Price:</strong> ₹{order.price ? order.price.toFixed(2) : 'N/A'}/-
+                    </p>
                   </div>
                 </div>
               </div>
-            </div>
-          ))
+            ))}
+          </div>
         ) : (
           <div>No orders found</div>
         )}

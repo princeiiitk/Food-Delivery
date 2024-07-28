@@ -7,17 +7,17 @@ import '../App.css';
 import axios from 'axios';
 
 export default function Home() {
-  const [fooditem, setFooditem] = useState([]);
-  const [foodcat, setFoodcat] = useState([]);
+  const [foodItems, setFoodItems] = useState([]);
+  const [foodCategories, setFoodCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const reload = async () => {
+  const fetchFoodData = async () => {
     try {
       const url = 'https://fooddelivery-j1hz.onrender.com/foodItem';
       const response = await axios.get(url);
-      setFoodcat(response.data[1]);
-      setFooditem(response.data[0]);
+      setFoodCategories(response.data[1]);
+      setFoodItems(response.data[0]);
       setLoading(false);
     } catch (error) {
       setError(error);
@@ -26,44 +26,47 @@ export default function Home() {
   };
 
   useEffect(() => {
-    reload();
+    fetchFoodData();
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="loading">Loading...</div>;
   }
 
   if (error) {
-    return <div>Error: {error.message}</div>;
+    return <div className="error">Error: {error.message}</div>;
   }
 
   return (
     <>
-      <div><Navbar /></div>
-      <div><Carousal /></div>
-      <div className='container'>
-        {
-          foodcat.length > 0
-            ? foodcat.map((category) => (
-                <div key={category._id} className='fs-3 m-2 row mb-3 align-center'>
-                  {category.CategoryName}
-                  <hr />
-                  {
-                    fooditem.length > 0
-                      ? fooditem.filter((item) => item.CategoryName === category.CategoryName)
-                          .map((filteredItem) => (
-                            <div key={filteredItem._id} className='col-12 col-md-6 col-lg-3'>
-                              <Cards foodItem={filteredItem} option={filteredItem.options[0]} />
-                            </div>
-                          ))
-                      : <div> not found</div>
-                  }
-                </div>
-              ))
-            : <div>No categories found</div>
-        }
+      <Navbar />
+      <Carousal />
+      <div className="container">
+        {foodCategories.length > 0 ? (
+          foodCategories.map((category) => (
+            <div key={category._id} className="category-section">
+              <h3 className="category-title">{category.CategoryName}</h3>
+              <hr />
+              <div className="row">
+                {foodItems.length > 0 ? (
+                  foodItems
+                    .filter((item) => item.CategoryName === category.CategoryName)
+                    .map((filteredItem) => (
+                      <div key={filteredItem._id} className="col-12 col-md-6 col-lg-3 mb-4">
+                        <Cards foodItem={filteredItem} option={filteredItem.options[0]} />
+                      </div>
+                    ))
+                ) : (
+                  <div className="not-found">No items found in this category</div>
+                )}
+              </div>
+            </div>
+          ))
+        ) : (
+          <div className="no-categories">No categories found</div>
+        )}
       </div>
-      <div><Footer /></div>
+      <Footer />
     </>
   );
 }

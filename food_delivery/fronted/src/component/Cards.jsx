@@ -1,59 +1,74 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatchCart } from './ContextApi';
 
-export default function Cards(prob) {
-  let priceref = useRef()
+export default function Cards({ foodItem, option }) {
   const [Qty, setQty] = useState(1);
   const [Size, setSize] = useState("");
-  const dispatch = useDispatchCart()
+  const [alertVisible, setAlertVisible] = useState(false);
+  const priceref = useRef();
+  const dispatch = useDispatchCart();
 
-
-
-
-  let options = prob.option
-  let priceoption = Object.keys(options);
-  let finalprice = Qty * parseInt(options[Size])
-
+  const priceOptions = Object.keys(option);
+  const finalPrice = Qty * parseInt(option[Size]);
 
   useEffect(() => {
-    setSize(priceref.current.value)
-  }, [])
+    setSize(priceref.current.value);
+  }, []);
 
   const Carthandle = async () => {
-    await dispatch({ type: 'ADD', id: prob.foodItem._id, name: prob.foodItem.name, img: prob.foodItem.img, price: finalprice, Qty: Qty, Size: Size })
-  }
+    await dispatch({
+      type: 'ADD',
+      id: foodItem._id,
+      name: foodItem.name,
+      img: foodItem.img,
+      price: finalPrice,
+      Qty: Qty,
+      Size: Size
+    });
+    setAlertVisible(true);
+    setTimeout(() => setAlertVisible(false), 2000);
+  };
 
   return (
-    <>
-      <div className="card mt-3" style={{ "width": "18rem", "maxWidth": "3600px", "height": "fixed" }}>
-        <img className="card-img-top" src={prob.foodItem.img} alt="Card cap" style={{ height: "180px", objectFit: "fill" }}></img>
-        <div className="card-body">
-          <h5 className="card-title">{prob.foodItem.name}</h5>
-          <p className="card-text">A delightful fusion of flavors</p>
-          <div className='container w-100'>
-            <select className='m-2 bg-success' onChange={(e) => setQty(e.target.value)}>
-              {
-                Array.from(Array(6), (e, i) => {
-                  return (
-                    <option key={i + 1} value={i + 1} >{i + 1}</option>
-                  )
-                })
-              }
+    <div className="card mt-3" style={{ width: "18rem", maxWidth: "360px" }}>
+      <img
+        className="card-img-top"
+        src={foodItem.img}
+        alt={foodItem.name}
+        style={{ height: "180px", objectFit: "fill" }}
+      />
+      <div className="card-body">
+        <h5 className="card-title">{foodItem.name}</h5>
+        <p className="card-text">A delightful fusion of flavors</p>
+        <div className="container w-100">
+          <div className="d-flex mb-2">
+            <select
+              className="form-select me-2"
+              onChange={(e) => setQty(e.target.value)}
+              value={Qty}
+            >
+              {Array.from({ length: 6 }, (v, i) => (
+                <option key={i + 1} value={i + 1}>{i + 1}</option>
+              ))}
             </select>
-            <select className='m-2 h-100 bg-success rounded' onChange={(e) => { setSize(e.target.value) }} ref={priceref}>
-              {
-                priceoption.map((data) => {
-                  return <><option keys={data} value={data} >{data}</option></>
-                })
-              }
+            <select
+              className="form-select"
+              onChange={(e) => setSize(e.target.value)}
+              ref={priceref}
+              value={Size}
+            >
+              {priceOptions.map((size, index) => (
+                <option key={index} value={size}>{size}</option>
+              ))}
             </select>
-            <br></br>
-            <div className='d-inline'>₹{finalprice}/-</div>
-            <hr></hr>
-            <div className="btn bg-success justify-center ms-2" onClick={Carthandle}>Add to Cart</div>
           </div>
+          <div className="mb-2">₹{finalPrice}/-</div>
+          <button className="btn btn-success w-100" onClick={Carthandle}>
+            Add to Cart
+          </button>
+          {alertVisible && <div className="alert alert-success mt-2">Item added to cart!</div>}
         </div>
       </div>
-    </>
-  )
+    </div>
+  );
 }
