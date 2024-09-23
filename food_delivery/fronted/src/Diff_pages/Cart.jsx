@@ -1,8 +1,10 @@
 import React, { useMemo } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'
 import { useDispatchCart, useCart } from '../component/ContextApi';
 
 export default function Cart() {
+      let Navigate = useNavigate()
     const data = useCart();
     const dispatch = useDispatchCart();
 
@@ -25,12 +27,23 @@ export default function Cart() {
     const totalPrice = useMemo(() => data.reduce((total, { price }) => total + price, 0), [data]);
 
     if (data.length === 0) {
+         const onClose1= () => {
+           Navigate('/')
+       }
         return (
-            <div className='m-5 w-100 text-center fs-3'>The Cart is Empty</div>
+            <>
+                <button className='btn bg-danger fs-4' style={{ marginLeft: "90%", marginTop: "35px" }} onClick={onClose1}> X </button>
+               <div className='m-5 w-100 text-center fs-3'>The Cart is Empty</div>
+            </>
+            
         );
     }
-
+    const onClose= () => {
+           Navigate('/')
+       }
     return (
+         <>
+        <button className='btn bg-danger fs-4' style={{ marginLeft: "90%", marginTop: "35px" }} onClick={onClose}> X </button>
         <div className='container m-auto mt-5 table-responsive-sm table-responsive-md'>
             <table className='table table-hover'>
                 <thead className='text-success fs-4'>
@@ -68,6 +81,7 @@ export default function Cart() {
             <div>
                 <button className='btn bg-success mt-5' onClick={handleCheckout}>Check Out</button>
             </div>
-        </div>
+            </div>
+            </>
     );
 }

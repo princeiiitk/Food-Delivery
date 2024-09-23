@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useDispatchCart } from './ContextApi';
 
 export default function Cards({ foodItem, option }) {
+
   const [Qty, setQty] = useState(1);
   const [Size, setSize] = useState("");
   const [alertVisible, setAlertVisible] = useState(false);

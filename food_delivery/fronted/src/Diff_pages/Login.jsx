@@ -25,20 +25,20 @@ export default function Login() {
     const url = "https://fooddelivery-j1hz.onrender.com/Login"
     const response = await axios.post(url, obj)
 
-    const json = response.data
+    const Registeruser = response.data
 
-    console.log(json)
-
-
+    console.log(Registeruser)
 
 
-    if (!json.success) {
+
+
+    if (!Registeruser.success) {
       alert("Incorrect password or email")
     }
-    else if (json.success) {
+    else if (Registeruser.success) {
       Navigate('/')
-      localStorage.setItem("authToken", json.authToken);
-      localStorage.setItem("useremail", user.email);
+      localStorage.setItem("authToken", Registeruser.authToken);
+      localStorage.setItem("useremail", Registeruser.email);
 
 
 

@@ -12,7 +12,7 @@ app.use(express.json()
 //routes 1 for get all data from mongoDB and display on home page
 const foodItems = require('./model/food-items')
 const food_cat = require('./model/food_cat')
-app.get('/foodItem', async (req, res) => {
+app.get('/foodItems', async (req, res) => {
   const data = await foodItems.find({})
   const food = await food_cat.find({})
   return res.send([data, food])
@@ -198,7 +198,10 @@ app.post('/myOrder', async (req, res) => {
 
 
 
-
+app.get('/', (req, res) => {
+ 
+  return res.send("hello");
+})
 
 
 app.listen(port, () => {

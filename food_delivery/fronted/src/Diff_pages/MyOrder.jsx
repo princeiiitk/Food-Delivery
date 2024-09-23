@@ -4,7 +4,7 @@ import Navbar from '../component/Navbar';
 import axios from 'axios';
 
 export default function MyOrder() {
-  const [orderData, setOrderData] = useState([]);
+  const [orderData, setOrderData] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
