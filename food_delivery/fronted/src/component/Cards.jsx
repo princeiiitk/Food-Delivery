@@ -31,20 +31,19 @@ export default function Cards({ foodItem, option }) {
   };
 
   return (
-    <div className="card mt-3" style={{ width: "18rem", maxWidth: "360px" }}>
+    <div className="card mt-3 max-w-xs mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
       <img
-        className="card-img-top"
+        className="w-full h-48 object-cover"
         src={foodItem.img}
         alt={foodItem.name}
-        style={{ height: "180px", objectFit: "fill" }}
       />
-      <div className="card-body">
-        <h5 className="card-title">{foodItem.name}</h5>
-        <p className="card-text">A delightful fusion of flavors</p>
-        <div className="container w-100">
-          <div className="d-flex mb-2">
+      <div className="p-4">
+        <h5 className="text-xl font-semibold">{foodItem.name}</h5>
+        <p className="text-gray-600 mb-2">A delightful fusion of flavors</p>
+        <div className="container w-full">
+          <div className="flex mb-2">
             <select
-              className="form-select me-2"
+              className="form-select me-2 border rounded p-2 w-1/2"
               onChange={(e) => setQty(e.target.value)}
               value={Qty}
             >
@@ -53,7 +52,7 @@ export default function Cards({ foodItem, option }) {
               ))}
             </select>
             <select
-              className="form-select"
+              className="form-select border rounded p-2 w-1/2"
               onChange={(e) => setSize(e.target.value)}
               ref={priceref}
               value={Size}
@@ -63,11 +62,18 @@ export default function Cards({ foodItem, option }) {
               ))}
             </select>
           </div>
-          <div className="mb-2">₹{finalPrice}/-</div>
-          <button className="btn btn-success w-100" onClick={Carthandle}>
+          <div className="mb-2 text-lg font-bold">₹{finalPrice}/-</div>
+          <button
+            className="btn btn-success bg-green-500 hover:bg-green-600 text-white font-bold py-2 rounded w-full"
+            onClick={Carthandle}
+          >
             Add to Cart
           </button>
-          {alertVisible && <div className="alert alert-success mt-2">Item added to cart!</div>}
+          {alertVisible && (
+            <div className="alert alert-success mt-2 text-green-600">
+              Item added to cart!
+            </div>
+          )}
         </div>
       </div>
     </div>

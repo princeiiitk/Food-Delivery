@@ -70,8 +70,7 @@ app.post('/createuser', validationcheck, async (req, res) => {
 })
 
 
-//routes 3 for login use after matching email or password req. sending from fronted 
-//jwt module use for genrate for authtoken and give authorasation
+
  const jwt = require('jsonwebtoken')
 
 

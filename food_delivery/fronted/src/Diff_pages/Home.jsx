@@ -3,7 +3,7 @@ import Navbar from '../component/Navbar';
 import Footer from '../component/Footer';
 import Cards from '../component/Cards';
 import Carousal from '../component/Carousal';
-import '../App.css';
+
 import axios from 'axios';
 
 export default function Home() {
@@ -41,29 +41,29 @@ export default function Home() {
     <>
       <Navbar />
       <Carousal />
-      <div className="container">
+      <div className="container mx-auto px-4">
         {foodCategories.length > 0 ? (
           foodCategories.map((category) => (
-            <div key={category._id} className="category-section">
-              <h3 className="category-title">{category.CategoryName}</h3>
-              <hr />
-              <div className="row">
+            <div key={category._id} className="my-8">
+              <h3 className="text-2xl font-semibold text-gray-800">{category.CategoryName}</h3>
+              <hr className="my-2 border-gray-300" />
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {foodItems.length > 0 ? (
                   foodItems
                     .filter((item) => item.CategoryName === category.CategoryName)
                     .map((filteredItem) => (
-                      <div key={filteredItem._id} className="col-12 col-md-6 col-lg-3 mb-4">
+                      <div key={filteredItem._id} className="bg-white shadow-md rounded-lg overflow-hidden">
                         <Cards foodItem={filteredItem} option={filteredItem.options[0]} />
                       </div>
                     ))
                 ) : (
-                  <div className="not-found">No items found in this category</div>
+                  <div className="col-span-4 text-center text-gray-500">No items found in this category</div>
                 )}
               </div>
             </div>
           ))
         ) : (
-          <div className="no-categories">No categories found</div>
+          <div className="text-center text-gray-500">No categories found</div>
         )}
       </div>
       <Footer />

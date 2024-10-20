@@ -40,39 +40,34 @@ export default function MyOrder() {
   return (
     <>
       <Navbar />
-      <div className="container">
-        <h1 className="my-4">Your Orders</h1>
+      <div className="container mx-auto px-4 mt-6">
+        <h1 className="text-2xl font-bold text-center mb-6">Your Orders</h1>
         {orderData.length > 0 ? (
-          <div className="row">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {orderData.slice(0).reverse().map((order) => (
-             
-              <div key={order._id} className="col-12 col-md-6 col-lg-3 mb-4">
-                
-                <div className="card h-100">
-                  <img
-                    src={order.img || 'placeholder.jpg'}
-                    className="card-img-top"
-                    alt={order.name || 'Food item'}
-                    style={{ height: '200px', objectFit: 'cover' }}
-                  />
-                  <div className="card-body">
-                    <h5 className="card-title">{order.name || 'Unnamed Item'}</h5>
-                    <p className="card-text">
-                      <strong>Quantity:</strong> {order.Qty || 'N/A'}
-                    </p>
-                    <p className="card-text">
-                      <strong>Size:</strong> {order.Size || 'N/A'}
-                    </p>
-                    <p className="card-text">
-                      <strong>Price:</strong> ₹{order.price ? order.price.toFixed(2) : 'N/A'}/-
-                    </p>
-                  </div>
+              <div key={order._id} className="bg-white shadow-md rounded-lg overflow-hidden">
+                <img
+                  src={order.img || 'placeholder.jpg'}
+                  className="w-full h-48 object-cover"
+                  alt={order.name || 'Food item'}
+                />
+                <div className="p-4">
+                  <h5 className="text-lg font-semibold">{order.name || 'Unnamed Item'}</h5>
+                  <p className="text-gray-700 mt-2">
+                    <strong>Quantity:</strong> {order.Qty || 'N/A'}
+                  </p>
+                  <p className="text-gray-700 mt-2">
+                    <strong>Size:</strong> {order.Size || 'N/A'}
+                  </p>
+                  <p className="text-gray-700 mt-2">
+                    <strong>Price:</strong> ₹{order.price ? order.price.toFixed(2) : 'N/A'}/-
+                  </p>
                 </div>
               </div>
             ))}
           </div>
         ) : (
-          <div>No orders found</div>
+          <div className="text-center text-xl mt-6">No orders found</div>
         )}
       </div>
       <Footer />

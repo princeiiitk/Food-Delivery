@@ -1,10 +1,11 @@
 
 import { Link, useNavigate } from 'react-router-dom';
-import Badge from 'react-bootstrap/Badge';
 
+import { useState } from 'react';
 import { useCart } from './ContextApi';
 
 export default function Navbar() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
   const cartData = useCart();
 
@@ -17,42 +18,89 @@ export default function Navbar() {
   const handleCartClick = () => {
     navigate('/Cart');
   };
-
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top" style={{ padding: '0.5rem 1rem' }}>
-        <div className="container-fluid">
-          <Link className="navbar-brand fs-2 text-light" to="/">FooDY</Link>
-          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
+      <nav className="bg-gray-900 text-white sticky top-0 z-50 shadow-md ">
+        <div className="container mx-auto px-4 py-3 flex justify-between items-center">
+
+          <Link to="/" className="text-3xl font-bold text-white">FooDY</Link>
+
+          <button
+            className="lg:hidden p-2 text-white focus:outline-none"
+            onClick={toggleMobileMenu}
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-16 6h16"></path>
+            </svg>
           </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav me-auto mb-2">
-              <li className="nav-item">
-                <Link className="nav-link active fs-4" aria-current="page" to="/">Home</Link>
-              </li>
+
+
+
+
+
+          <div className="hidden lg:flex items-center space-x-4">
+
+            <div className="hidden lg:flex items-center space-x-6">
+              <Link to="/" className="text-lg px-4 py-2 border border-white rounded-lg hover:bg-white hover:text-gray-900 transition-all duration-300 font-sans">Home</Link>
               {localStorage.getItem('authToken') && (
-                <li className="nav-item">
-                  <Link className="nav-link active fs-4" aria-current="page" to="/MyOrder">MyOrders</Link>
-                </li>
+                <Link to="/MyOrder" className="text-xl hover:text-gray-300">My Orders</Link>
               )}
-            </ul>
+            </div>
             {!localStorage.getItem('authToken') ? (
-              <div className="d-flex">
-                <Link className="btn btn-outline-light mx-1 fs-5" to="/createuser">Signup</Link>
-                <Link className="btn btn-outline-light fs-5" to="/Login">Login</Link>
-              </div>
+              <>
+                <Link to="/createuser" className="text-lg px-4 py-2 border border-white rounded-lg hover:bg-white hover:text-gray-900 transition-all duration-300 font-sans">Signup</Link>
+                <Link to="/Login" className="text-lg px-4 py-2 border border-white rounded-lg hover:bg-white hover:text-gray-900 transition-all duration-300 font-sans">Login</Link>
+              </>
             ) : (
               <>
-                <button className="btn btn-outline-light fs-5" onClick={handleCartClick}>
-                  My Cart <Badge pill bg="danger">{cartData.length}</Badge>
+                <button className="font-sans relative text-lg px-4 py-2 border border-white rounded-lg hover:bg-white hover:text-gray-900 transition-all duration-300" onClick={handleCartClick}>
+                  My Cart
+                  {cartData.length > 0 && (
+                    <span className=" font-sans absolute top-0 right-0 -mt-2 -mr-2 bg-red-600 text-white rounded-full h-6 w-6 flex items-center justify-center">
+                      {cartData.length}
+                    </span>
+                  )}
                 </button>
-               
-                <button className="btn btn-outline-danger fs-5" onClick={handleLogout}>Logout</button>
+                <button className=" font-sans text-lg px-4 py-2 border border-red-500 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-all duration-300" onClick={handleLogout}>
+                  Logout
+                </button>
               </>
             )}
           </div>
         </div>
+
+
+        {isMobileMenuOpen && (
+          <div className="lg:hidden px-4 pb-4 space-y-2">
+            <Link to="/" className="text-lg px-4 py-2 border border-white rounded-lg hover:bg-white hover:text-gray-900 transition-all duration-300 font-sans">Home</Link>
+            {localStorage.getItem('authToken') && (
+              <Link to="/MyOrder" className="block text-lg text-white hover:text-gray-300">My Orders</Link>
+            )}
+            {!localStorage.getItem('authToken') ? (
+              <>
+                <Link to="/createuser" className="block text-lg text-white border border-white rounded-lg px-4 py-2 hover:bg-white hover:text-gray-900 transition-all duration-300">Signup</Link>
+                <Link to="/Login" className="block text-lg text-white border border-white rounded-lg px-4 py-2 hover:bg-white hover:text-gray-900 transition-all duration-300">Login</Link>
+              </>
+            ) : (
+              <>
+                <button className="relative block text-lg text-white border border-white rounded-lg px-4 py-2 hover:bg-white hover:text-gray-900 transition-all duration-300" onClick={handleCartClick}>
+                  My Cart
+                  {cartData.length > 0 && (
+                    <span className="absolute top-0 right-0 -mt-2 -mr-2 bg-red-600 text-white rounded-full h-6 w-6 flex items-center justify-center">
+                      {cartData.length}
+                    </span>
+                  )}
+                </button>
+                <button className="block text-lg text-white border border-red-500 bg-red-500 rounded-lg px-4 py-2 hover:bg-red-600 transition-all duration-300" onClick={handleLogout}>
+                  Logout
+                </button>
+              </>
+            )}
+          </div>
+        )}
       </nav>
     </>
   );

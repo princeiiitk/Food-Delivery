@@ -1,5 +1,4 @@
 
-import './App.css';
 import Home from './Diff_pages/Home';
 import Login from './Diff_pages/Login';
 import Sginup from './Diff_pages/Sginup';
@@ -10,9 +9,7 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-import '../node_modules/bootstrap-dark-5/dist/css/bootstrap-dark.min.css'
-import '../node_modules/bootstrap/dist/js/bootstrap.bundle'
-import '../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js'
+
 import { ContextApi } from './component/ContextApi';
 
 
@@ -23,6 +20,7 @@ import { ContextApi } from './component/ContextApi';
 function App() {
   return (
     <>
+     
     <ContextApi>
     <div className="App">
     <BrowserRouter>
