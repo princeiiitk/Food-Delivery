@@ -9,7 +9,8 @@ export default function FilterHome() {
   
   const changeprice = useSelector((state) => state.filterprice)?.filterprice
   const changecategory = useSelector((state) => state.filterprice)?.foodcat
-
+ 
+  
   const [foodItems, setFoodItems] = useState([]);
   const [foodCategories, setFoodCategories] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -22,7 +23,7 @@ export default function FilterHome() {
       const response = await axios.get(url);
       setFoodCategories(response.data[1]);
       setFoodItems(response.data[0]);
-      console.log("rrr",foodItems)
+     
       
       
       setLoading(false);
@@ -44,7 +45,8 @@ export default function FilterHome() {
   if (error) {
     return <div className="error">Error occur: {error.message}</div>;
   }
- 
+
+
   return (
     <div className='flex flex-col lg:flex-row'>
       <div className="w-full lg:w-[20%] lg:block mb-4 lg:mb-0">

@@ -1,6 +1,9 @@
 import React from 'react';
 
+
 export default function Carousal() {
+
+  
   return (
     <div className="relative w-full h-[500px] overflow-hidden">
       <div className="carousel-inner relative w-full h-full">
@@ -11,10 +14,10 @@ export default function Carousal() {
             className="block w-full h-full object-cover"
             alt="Delicious burger with various toppings"
           />
-          <input className='w-[100%] border-2 border-red-400' placeholder='Enter Food Category'/>
+         
+         
         </div>
-
-
+ 
       </div>
 
 

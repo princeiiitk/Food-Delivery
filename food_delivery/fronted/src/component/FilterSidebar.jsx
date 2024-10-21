@@ -1,21 +1,23 @@
 import GradeIcon from '@mui/icons-material/Grade';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch,useSelector} from 'react-redux';
 import { ChangePrice, foodcategory } from '../FeatureSlice/FilterSlice';
 
 export default function Filter() {
     const dispatch = useDispatch();
-    const [selected, setSelected] = useState('Pizza');
+    const [selected, setSelected] = useState("All");
     const [price, setPrice] = useState(0);
-
+    const initialState = useSelector((state) => state.filterprice)?.foodcat
     const handlePriceChange = (e) => {
         const newPrice = parseInt(e.target.value);
         setPrice(newPrice);
+       
         dispatch(ChangePrice({ filterprice: newPrice }));
     };
 
     const handleOption = (e) => {
+        
         const choose = e.target.value;
         dispatch(foodcategory({ foodcat: choose }));
         setSelected(choose);
@@ -44,14 +46,16 @@ export default function Filter() {
                 <div className="flex flex-col items-center mt-3 m-2 border-2 border-black w-full py-3 rounded-xl shadow-xl">
                     <span className="text mb-2">Food Category</span>
                     <select
+                        name="All"
                         value={selected}
                         onChange={handleOption}
                         className="text-black bg-green-500 rounded-xl w-full h-10 mt-2"
                     >
-                        <option>Pizza</option>
-                        <option>Burger</option>
-                        <option>Starter</option>
-                        <option>Biryani/Rice</option>
+                        <option value="All">{initialState === "" ? "All Food" : initialState}</option>  {/* Added option for "All" */}
+                        <option value="Burger">Burger</option>
+                        <option value="Pizza">Pizza</option>
+                        <option value="Starter">Starter</option>
+                        <option value="Biryani/Rice">Biryani/Rice</option>
                     </select>
                 </div>
 

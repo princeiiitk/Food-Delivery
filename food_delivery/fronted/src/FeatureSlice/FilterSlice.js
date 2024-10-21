@@ -2,9 +2,10 @@ import {createSlice} from '@reduxjs/toolkit'
 
 
 const initialState = {
-    filterprice: 0
-    ,
-    foodcat: "Pizza"
+    filterprice: 0,
+    foodcat: "All Food",
+    Search:""
+
 }
 
 export const FilterSlice = createSlice({
@@ -19,11 +20,15 @@ export const FilterSlice = createSlice({
             
             state.foodcat = action.payload.foodcat;
         },
+        SearchCategory: (state, action) => {
+           
+            state.Search= action.payload.Search
+        }
     }
 
 })
 
-export const { ChangePrice, foodcategory } = FilterSlice.actions;
+export const { ChangePrice, foodcategory, SearchCategory } = FilterSlice.actions;
 export default FilterSlice.reducer;
 
 
