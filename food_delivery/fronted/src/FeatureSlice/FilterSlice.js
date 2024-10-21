@@ -4,7 +4,7 @@ import {createSlice} from '@reduxjs/toolkit'
 const initialState = {
     filterprice: 0
     ,
-    foodcat: ""
+    foodcat: "Pizza"
 }
 
 export const FilterSlice = createSlice({

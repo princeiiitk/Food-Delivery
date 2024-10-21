@@ -2,7 +2,7 @@
 import Navbar from '../component/Navbar';
 import Footer from '../component/Footer';
 import Carousal from '../component/Carousal';
-// import WithoutFilterHome from '../component/WithoutFilterHome';
+import WithoutFilterHome from '../component/WithoutFilterHome';
 import WithFilter from '../component/FilterHome';
 import { useSelector } from 'react-redux';
 
@@ -10,13 +10,16 @@ import { useSelector } from 'react-redux';
 
 export default function Home() {
   const changeprice = useSelector((state) => state.filterprice.filterprice)
- console.log(changeprice)
-
+  const changecategory = useSelector((state) => state.filterprice)?.foodcat.toUpperCase()
+ 
   return (
     <>
       <Navbar />
       <Carousal />
-      <WithFilter />
+      {
+        (changeprice)  ? <WithFilter /> : <WithoutFilterHome/>
+      }
+      
       <Footer />
     </>
   );

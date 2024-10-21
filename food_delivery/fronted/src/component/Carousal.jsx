@@ -11,6 +11,7 @@ export default function Carousal() {
             className="block w-full h-full object-cover"
             alt="Delicious burger with various toppings"
           />
+          <input className='w-[100%] border-2 border-red-400' placeholder='Enter Food Category'/>
         </div>
 
 

@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import FilterSidebar from './FilterSidebar'
@@ -8,8 +9,7 @@ export default function FilterHome() {
   
   const changeprice = useSelector((state) => state.filterprice)?.filterprice
   const changecategory = useSelector((state) => state.filterprice)?.foodcat.toUpperCase()
-  
-  console.log(changecategory) 
+ 
   const [foodItems, setFoodItems] = useState([]);
   const [foodCategories, setFoodCategories] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -45,9 +45,9 @@ export default function FilterHome() {
   }
  
   return (
-    <div className='flex'>
-      <div className='w-[20%]'>
-        <FilterSidebar></FilterSidebar>
+    <div className='flex flex-col lg:flex-row'>
+      <div className="w-full lg:w-[20%] lg:block mb-4 lg:mb-0">
+        <FilterSidebar />
       </div>
       <div className="container mx-auto px-4">
         {foodCategories.length > 0 ?
@@ -55,11 +55,14 @@ export default function FilterHome() {
             {foodItems.length > 0 ? (
               foodItems.map((filteredItem) => (
               
-              (changeprice >= (Number(filteredItem.options[0]?.half) || Number(filteredItem.options[0]?.regular || 0)))
-                  && ((changecategory === (filteredItem.CategoryName).toUpperCase())) ?
+              ((changeprice >= (Number(filteredItem.options[0]?.half) || Number(filteredItem.options[0]?.regular || 0)))
+                  && ((changecategory === (filteredItem.CategoryName).toUpperCase()))) || 
+                ((changecategory === (filteredItem.CategoryName).toUpperCase()))) ||
+                ((changeprice >= (Number(filteredItem.options[0]?.half) || Number(filteredItem.options[0]?.regular || 0)))
+                 ?
                 (<div key={filteredItem._id} className="bg-white shadow-md rounded-lg overflow-hidden">
                   <Cards foodItem={filteredItem} option={filteredItem.options[0]} />
-                </div>):null
+                </div>) : null
               ))
             ) : (
               <div className="col-span-4 text-center text-gray-500">No items found in this category</div>
