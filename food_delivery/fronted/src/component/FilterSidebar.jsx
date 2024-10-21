@@ -1,9 +1,21 @@
 import GradeIcon from '@mui/icons-material/Grade';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import React, { useState } from 'react'
+import {useDispatch} from 'react-redux'
+import { ChangePrice } from '../FeatureSlice/FilterSlice';
 
 export default function Filter() {
-    const [Number1,setNumber1]=useState(10)
+    const dispatch = useDispatch()
+    const [Number, setNumber] = useState(0)
+    const handlepricechange = (e) => {
+        const newPrice = parseInt(e.target.value);
+        setNumber(newPrice)
+        dispatch(ChangePrice({ filterprice: newPrice }));
+
+    }
+    
+ 
+    
   return (
       <>
           <div className="mt-12 items-center  flex flex-col ebg-slate-100 text-3xl font-sans border-2 border-black h-screen shadow-xl rounded-2xl m-1 p-2">
@@ -12,8 +24,8 @@ export default function Filter() {
               </div>
               <div className='flex flex-col items-center mt-3 m-2 border-2 border-black w-[100%] my-3 py-3 rounded-xl shadow-xl '>
                   <span className='text-2xl mb-2'> Price</span>
-                  <input onChange={(e) => setNumber1(e.target.value)} type='range' className='text-black p-2' name='price' min={0} max={500} />
-                  <span className='border-2 border-black rounded-2xl p-3 w-25 '> ₹ {Number1 }</span>
+                  <input onChange={handlepricechange} type='range' className='text-black p-2' name='price' min={0} max={500} />
+                  <span className='border-2 border-black rounded-2xl p-3 w-25 '> ₹ {Number }</span>
               </div>
               <div className='border-2 border-black text-2xl flex flex-col items-center mt-3 m-2  w-[100%] my-3 py-3 rounded-xl shadow-xl'>
                   <div>
