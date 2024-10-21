@@ -2,7 +2,9 @@ import {createSlice} from '@reduxjs/toolkit'
 
 
 const initialState = {
-     filterprice:0
+    filterprice: 0
+    ,
+    foodcat: ""
 }
 
 export const FilterSlice = createSlice({
@@ -12,11 +14,16 @@ export const FilterSlice = createSlice({
         ChangePrice: (state, action) => {
            
         state.filterprice = action.payload.filterprice;
-    }}
+        },
+        foodcategory: (state, action) => {
+            
+            state.foodcat = action.payload.foodcat;
+        },
+    }
 
 })
 
-export const { ChangePrice } = FilterSlice.actions;
+export const { ChangePrice, foodcategory } = FilterSlice.actions;
 export default FilterSlice.reducer;
 
 
