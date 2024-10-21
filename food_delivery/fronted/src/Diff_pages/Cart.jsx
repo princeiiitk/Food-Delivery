@@ -1,13 +1,14 @@
 import React, { useMemo } from 'react';
 import axios from 'axios';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { useNavigate } from 'react-router-dom';
-import { useDispatchCart, useCart } from '../component/ContextApi';
-
+import {useDispatch,useSelector} from 'react-redux'
+import { RemoveItems,ClearCart } from '../FeatureSlice/CartSlice';
 export default function Cart() {
     const navigate = useNavigate();
-    const data = useCart();
+    const data = useSelector((state)=>state.cart.Cart);
     console.log(data);
-    const dispatch = useDispatchCart();
+    const dispatch = useDispatch();
 
     const handleCheckout = async () => {
         try {
@@ -18,7 +19,7 @@ export default function Cart() {
             console.log(response);
 
             if (response.status === 200) {
-                dispatch({ type: 'DROP' });
+                dispatch(ClearCart());
             }
         } catch (error) {
             console.error('Checkout failed', error);
@@ -72,7 +73,7 @@ export default function Cart() {
                             </tr>
                         </thead>
                         <tbody>
-                            {data.map(({ name, Qty, Size, price }, index) => (
+                            {data.map(({id, name, Qty, Size, price }, index) => (
                                 <tr key={index} className='border-b hover:bg-gray-50'>
                                     <td className='py-3 px-5 text-center'>{index + 1}</td>
                                     <td className='py-3 px-5 text-center'>{name}</td>
@@ -83,9 +84,9 @@ export default function Cart() {
                                         <button
                                             type="button"
                                             className='text-red-500 hover:text-red-700'
-                                            onClick={() => dispatch({ type: "REMOVE", index })}
+                                            onClick={() => dispatch(RemoveItems({id}))}
                                         >
-                                            <i className="fa-solid fa-trash-can"></i>
+                                            <DeleteIcon/>
                                         </button>
                                     </td>
                                 </tr>

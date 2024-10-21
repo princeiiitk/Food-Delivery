@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useDispatchCart } from './ContextApi';
+import { useDispatch } from 'react-redux'
+import { AddToCart } from '../FeatureSlice/CartSlice';
 
 export default function Cards({ foodItem, option }) {
 
@@ -7,25 +8,27 @@ export default function Cards({ foodItem, option }) {
   const [Size, setSize] = useState("");
   const [alertVisible, setAlertVisible] = useState(false);
   const priceref = useRef();
-  const dispatch = useDispatchCart();
+  const dispatch = useDispatch();
 
   const priceOptions = Object.keys(option);
-  const finalPrice = Qty * parseInt(option[Size]);
+  const finalPrice = Qty * parseInt(option[Size] || 0) ;
 
   useEffect(() => {
-    setSize(priceref.current.value);
-  }, []);
+    if (priceOptions.length > 0 && !Size) {
+      setSize(priceOptions[0]); 
+    }
+  }, [priceOptions, Size]);;
 
-  const Carthandle = async () => {
-    await dispatch({
-      type: 'ADD',
+  const Carthandle = () => {
+    dispatch(AddToCart({
+      
       id: foodItem._id,
       name: foodItem.name,
       img: foodItem.img,
       price: finalPrice,
       Qty: Qty,
       Size: Size
-    });
+    }));
     setAlertVisible(true);
     setTimeout(() => setAlertVisible(false), 2000);
   };

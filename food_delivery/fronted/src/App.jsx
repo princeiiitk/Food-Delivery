@@ -10,7 +10,7 @@ import {
   Route,
 } from "react-router-dom";
 
-import { ContextApi } from './component/ContextApi';
+
 
 
 
@@ -21,7 +21,7 @@ function App() {
   return (
     <>
      
-    <ContextApi>
+   
     <div className="App">
     <BrowserRouter>
     <Routes>
@@ -33,7 +33,7 @@ function App() {
     </Routes>
     </BrowserRouter>
     </div>
-    </ContextApi>
+    
     
     </>
   );

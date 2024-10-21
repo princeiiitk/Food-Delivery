@@ -2,12 +2,12 @@
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useState } from 'react';
-import { useCart } from './ContextApi';
+
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
-  const cartData = useCart();
+  const cartData = [];
 
 
   const handleLogout = () => {
