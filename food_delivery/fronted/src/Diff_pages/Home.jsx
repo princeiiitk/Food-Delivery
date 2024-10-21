@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux';
 
 export default function Home() {
   const changeprice = useSelector((state) => state.filterprice.filterprice)
-  const changecategory = useSelector((state) => state.filterprice)?.foodcat.toUpperCase()
+  // const changecategory = useSelector((state) => state.filterprice)?.foodcat.toUpperCase()
  
   return (
     <>

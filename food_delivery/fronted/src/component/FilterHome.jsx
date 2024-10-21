@@ -8,8 +8,8 @@ import axios from 'axios';
 export default function FilterHome() {
   
   const changeprice = useSelector((state) => state.filterprice)?.filterprice
-  const changecategory = useSelector((state) => state.filterprice)?.foodcat.toUpperCase()
- 
+  const changecategory = useSelector((state) => state.filterprice)?.foodcat
+
   const [foodItems, setFoodItems] = useState([]);
   const [foodCategories, setFoodCategories] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -22,7 +22,8 @@ export default function FilterHome() {
       const response = await axios.get(url);
       setFoodCategories(response.data[1]);
       setFoodItems(response.data[0]);
-      console.log("ppp",foodItems)
+      console.log("rrr",foodItems)
+      
       
       setLoading(false);
     } catch (error) {
@@ -41,7 +42,7 @@ export default function FilterHome() {
   }
 
   if (error) {
-    return <div className="error">Error: {error.message}</div>;
+    return <div className="error">Error occur: {error.message}</div>;
   }
  
   return (
@@ -55,10 +56,10 @@ export default function FilterHome() {
             {foodItems.length > 0 ? (
               foodItems.map((filteredItem) => (
               
-              ((changeprice >= (Number(filteredItem.options[0]?.half) || Number(filteredItem.options[0]?.regular || 0)))
-                  && ((changecategory === (filteredItem.CategoryName).toUpperCase()))) || 
-                ((changecategory === (filteredItem.CategoryName).toUpperCase()))) ||
-                ((changeprice >= (Number(filteredItem.options[0]?.half) || Number(filteredItem.options[0]?.regular || 0)))
+                ((changeprice >= (Number(filteredItem.options[0]?.half) || Number(filteredItem.options[0]?.regular))) && (changecategory === filteredItem.CategoryName))
+                  
+                  
+                  
                  ?
                 (<div key={filteredItem._id} className="bg-white shadow-md rounded-lg overflow-hidden">
                   <Cards foodItem={filteredItem} option={filteredItem.options[0]} />
