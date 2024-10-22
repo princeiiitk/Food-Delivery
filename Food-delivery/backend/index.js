@@ -189,8 +189,7 @@ app.post('/OrderData', async (req, res) => {
 const Orders = require('./model/Order');
 app.post('/myOrder', async (req, res) => {
   let eId = await Orders.findOne({ 'email': req.body.email })
-  // console.log(eId)
-  res.send(eId.order_data)
+ res.send(eId.order_data)
 });
 
 

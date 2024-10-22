@@ -22,13 +22,13 @@ export default function Login() {
   const handleSubmit = async (e) => {
     console.log("hii")
     e.preventDefault();
-    const obj = { email: user.email, password: user.password }
+    const UserAthu = { email: user.email, password: user.password }
     const url = "https://fooddelivery-j1hz.onrender.com/Login"
-    const response = await axios.post(url, obj)
+    const response = await axios.post(url, UserAthu)
 
     const Registeruser = response.data
 
-    console.log(Registeruser)
+   
 
 
 

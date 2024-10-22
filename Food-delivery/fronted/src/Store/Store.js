@@ -4,6 +4,6 @@ import FilterSlice from '../FeatureSlice/FilterSlice';
 export const store = configureStore({
     reducer: {
         cart: CartReducer,
-        filterprice: FilterSlice
+        Filter: FilterSlice
     }
 })

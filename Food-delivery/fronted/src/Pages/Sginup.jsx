@@ -14,14 +14,14 @@ export default function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const obj = { name: user.name, email: user.email, password: user.password, location: user.location };
+    const CreateAccount= { name: user.name, email: user.email, password: user.password, location: user.location };
     const url = "https://fooddelivery-j1hz.onrender.com/createuser";
 
     try {
-      const response = await axios.post(url, obj);
-      const json = response.data;
+      const response = await axios.post(url, CreateAccount);
+      const CreateAccountcheck = response.data;
 
-      if (!json) {
+      if (!CreateAccountcheck) {
         alert("Enter valid user");
       } else {
         navigate('/Login');

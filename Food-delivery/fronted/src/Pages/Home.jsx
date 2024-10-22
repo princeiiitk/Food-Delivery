@@ -9,16 +9,16 @@ import { useSelector } from 'react-redux';
 
 
 export default function Home() {
-  const changeprice = useSelector((state) => state.filterprice.filterprice)
-  const changecategory = useSelector((state) => state.filterprice)?.foodcat
-
-
+  const FilterPrice = useSelector((state) => state.Filter?.filterprice)
+  const FilterCategory = useSelector((state) => state.Filter?.foodcat)
+  console.log(FilterPrice,"opo")
+  console.log(FilterCategory,"ddd")
   return (
     <>
       <Navbar />
       <Carousal />
       {
-        (changeprice === 0 || changecategory === "All Food") ? <WithoutFilterHome /> : <WithFilter />
+        (FilterPrice === 0 || FilterCategory === "All Food") ? <WithoutFilterHome /> : <WithFilter />
       }
 
       <Footer />

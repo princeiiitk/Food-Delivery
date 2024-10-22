@@ -8,9 +8,9 @@ export default function Filter() {
     const dispatch = useDispatch();
     const [selected, setSelected] = useState("All");
     const [price, setPrice] = useState(0);
-    const initialState = useSelector((state) => state.filterprice)?.foodcat
+    const initialState = useSelector((state) => state.Filter?.foodcat)
 
-
+    console.log("filter----->", initialState)
     const handlePriceChange = (e) => {
         const newPrice = parseInt(e.target.value);
         setPrice(newPrice);

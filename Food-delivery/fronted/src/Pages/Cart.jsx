@@ -6,17 +6,17 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RemoveItems, ClearCart } from '../FeatureSlice/CartSlice';
 export default function Cart() {
     const navigate = useNavigate();
-    const data = useSelector((state) => state.cart.Cart);
-    console.log(data);
+    const Cartdata = useSelector((state) => state.cart.Cart);
+    
     const dispatch = useDispatch();
 
     const handleCheckout = async () => {
         try {
             const userEmail = localStorage.getItem('useremail');
             const url = 'https://fooddelivery-j1hz.onrender.com/OrderData';
-            const obj = { order_data: data, email: userEmail };
+            const obj = { order_data: Cartdata, email: userEmail };
             const response = await axios.post(url, obj);
-            console.log(response);
+            
 
             if (response.status === 200) {
                 dispatch(ClearCart());
@@ -26,9 +26,9 @@ export default function Cart() {
         }
     };
 
-    const totalPrice = useMemo(() => data.reduce((total, { price }) => total + price, 0), [data]);
+    const totalPrice = useMemo(() => Cartdata.reduce((total, { price }) => total + price, 0), [Cartdata]);
 
-    if (data.length === 0) {
+    if (Cartdata.length === 0) {
         const onClose = () => {
             navigate('/');
         };
@@ -73,7 +73,7 @@ export default function Cart() {
                             </tr>
                         </thead>
                         <tbody>
-                            {data.map(({ id, name, Qty, Size, price }, index) => (
+                            {Cartdata.map(({ id, name, Qty, Size, price }, index) => (
                                 <tr key={index} className='border-b hover:bg-gray-50'>
                                     <td className='py-3 px-5 text-center'>{index + 1}</td>
                                     <td className='py-3 px-5 text-center'>{name}</td>

@@ -7,8 +7,10 @@ import Cards from '../Component/Cards';
 import axios from 'axios';
 export default function FilterHome() {
   
-  const changeprice = useSelector((state) => state.filterprice)?.filterprice
-  const changecategory = useSelector((state) => state.filterprice)?.foodcat
+  const changeprice = useSelector((state) => state.Filter?.filterprice)
+  const changecategory = useSelector((state) =>state.Filter?.foodcat)
+
+  
  
   
   const [foodItems, setFoodItems] = useState([]);
