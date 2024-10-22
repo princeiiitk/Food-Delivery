@@ -1,9 +1,9 @@
 
-import Home from './Diff_pages/Home';
-import Login from './Diff_pages/Login';
-import Sginup from './Diff_pages/Sginup';
-import MyOrder from './Diff_pages/MyOrder';
-import Cart from './Diff_pages/Cart.jsx'
+import Home from './Pages/Home';
+import Login from './Pages/Login';
+import Sginup from './Pages/Sginup';
+import MyOrder from './Pages/MyOrder';
+import Cart from './Pages/Cart.jsx'
 import {
   BrowserRouter,
   Routes,
