@@ -2,11 +2,11 @@ import React, { useMemo } from 'react';
 import axios from 'axios';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useNavigate } from 'react-router-dom';
-import {useDispatch,useSelector} from 'react-redux'
-import { RemoveItems,ClearCart } from '../FeatureSlice/CartSlice';
+import { useDispatch, useSelector } from 'react-redux'
+import { RemoveItems, ClearCart } from '../FeatureSlice/CartSlice';
 export default function Cart() {
     const navigate = useNavigate();
-    const data = useSelector((state)=>state.cart.Cart);
+    const data = useSelector((state) => state.cart.Cart);
     console.log(data);
     const dispatch = useDispatch();
 
@@ -73,7 +73,7 @@ export default function Cart() {
                             </tr>
                         </thead>
                         <tbody>
-                            {data.map(({id, name, Qty, Size, price }, index) => (
+                            {data.map(({ id, name, Qty, Size, price }, index) => (
                                 <tr key={index} className='border-b hover:bg-gray-50'>
                                     <td className='py-3 px-5 text-center'>{index + 1}</td>
                                     <td className='py-3 px-5 text-center'>{name}</td>
@@ -84,9 +84,9 @@ export default function Cart() {
                                         <button
                                             type="button"
                                             className='text-red-500 hover:text-red-700'
-                                            onClick={() => dispatch(RemoveItems({id}))}
+                                            onClick={() => dispatch(RemoveItems({ id }))}
                                         >
-                                            <DeleteIcon/>
+                                            <DeleteIcon />
                                         </button>
                                     </td>
                                 </tr>

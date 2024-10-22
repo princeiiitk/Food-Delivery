@@ -11,17 +11,17 @@ export default function Cards({ foodItem, option }) {
   const dispatch = useDispatch();
 
   const priceOptions = Object.keys(option);
-  const finalPrice = Qty * parseInt(option[Size] || 0) ;
+  const finalPrice = Qty * parseInt(option[Size] || 0);
 
   useEffect(() => {
     if (priceOptions.length > 0 && !Size) {
-      setSize(priceOptions[0]); 
+      setSize(priceOptions[0]);
     }
   }, [priceOptions, Size]);;
 
   const Carthandle = () => {
     dispatch(AddToCart({
-      
+
       id: foodItem._id,
       name: foodItem.name,
       img: foodItem.img,

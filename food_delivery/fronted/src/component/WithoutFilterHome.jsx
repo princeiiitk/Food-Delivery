@@ -36,7 +36,7 @@ export default function WithoutFilterHome() {
 
     return (
         <div className="flex flex-col lg:flex-row">
-           
+
             <div className="w-full lg:w-[20%] lg:block mb-4 lg:mb-0">
                 <Filter />
             </div>

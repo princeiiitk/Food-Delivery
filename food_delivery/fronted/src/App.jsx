@@ -20,21 +20,21 @@ import {
 function App() {
   return (
     <>
-     
-   
-    <div className="App">
-    <BrowserRouter>
-    <Routes>
-      <Route  path='/' element={<Home/>}/>
-      <Route  path='/Login' element={<Login/>}/>
-      <Route  path='/CreateUser' element={<Sginup/>}/>
-      <Route path='/MyOrder' element={<MyOrder />} />
-      <Route  path='/cart' element={<Cart/>}/>    
-    </Routes>
-    </BrowserRouter>
-    </div>
-    
-    
+
+
+      <div className="App">
+        <BrowserRouter>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/Login' element={<Login />} />
+            <Route path='/CreateUser' element={<Sginup />} />
+            <Route path='/MyOrder' element={<MyOrder />} />
+            <Route path='/cart' element={<Cart />} />
+          </Routes>
+        </BrowserRouter>
+      </div>
+
+
     </>
   );
 }

@@ -12,7 +12,7 @@ export default function Home() {
   const changeprice = useSelector((state) => state.filterprice.filterprice)
   const changecategory = useSelector((state) => state.filterprice)?.foodcat
 
- 
+
   return (
     <>
       <Navbar />
@@ -20,7 +20,7 @@ export default function Home() {
       {
         (changeprice === 0 || changecategory === "All Food") ? <WithoutFilterHome /> : <WithFilter />
       }
-      
+
       <Footer />
     </>
   );

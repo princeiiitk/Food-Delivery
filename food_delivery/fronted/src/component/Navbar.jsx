@@ -1,6 +1,6 @@
 
 import { Link, useNavigate } from 'react-router-dom';
-
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -27,7 +27,10 @@ export default function Navbar() {
       <nav className="bg-gray-900 text-white sticky top-0 z-50 shadow-md ">
         <div className="container mx-auto px-4 py-3 flex justify-between items-center">
 
-          <Link to="/" className="text-3xl font-bold text-white">FooDY</Link>
+          <Link to="/" className="text-3xl font-bold text-white flex">
+            <img className='object-cover w-12 h-15 rounded-3xl  ' src='https://marketplace.canva.com/EAFpeiTrl4c/1/0/1600w/canva-abstract-chef-cooking-restaurant-free-logo-9Gfim1S8fHg.jpg' alt='' />
+            <span className='ml-1'>Fusion</span>
+          </Link>
 
           <button
             className="lg:hidden p-2 text-white focus:outline-none"
@@ -47,7 +50,7 @@ export default function Navbar() {
             <div className="hidden lg:flex items-center space-x-6">
               <Link to="/" className="text-lg px-4 py-2 border border-white rounded-lg hover:bg-white hover:text-gray-900 transition-all duration-300 font-sans">Home</Link>
               {localStorage.getItem('authToken') && (
-                <Link to="/MyOrder" className="text-xl hover:text-gray-300">My Orders</Link>
+                <Link to="/MyOrder" className="text-lg px-4 py-2 border border-white rounded-lg hover:bg-white hover:text-gray-900 transition-all duration-300 font-sans">Orders</Link>
               )}
             </div>
             {!localStorage.getItem('authToken') ? (
@@ -58,7 +61,9 @@ export default function Navbar() {
             ) : (
               <>
                 <button className="font-sans relative text-lg px-4 py-2 border border-white rounded-lg hover:bg-white hover:text-gray-900 transition-all duration-300" onClick={handleCartClick}>
-                  My Cart
+                    Cart
+                    
+                    <AddShoppingCartIcon/>
                   {cartData.length > 0 && (
                     <span className=" font-sans absolute top-0 right-0 -mt-2 -mr-2 bg-red-600 text-white rounded-full h-6 w-6 flex items-center justify-center">
                       {cartData.length}
@@ -78,7 +83,7 @@ export default function Navbar() {
           <div className="lg:hidden px-4 pb-4 space-y-2">
             <Link to="/" className="text-lg px-4 py-2 border border-white rounded-lg hover:bg-white hover:text-gray-900 transition-all duration-300 font-sans">Home</Link>
             {localStorage.getItem('authToken') && (
-              <Link to="/MyOrder" className="block text-lg text-white hover:text-gray-300">My Orders</Link>
+              <Link to="/MyOrder" className="w-20 block text-lg px-4 py-2 border border-white rounded-lg hover:bg-white hover:text-gray-900 transition-all duration-300 font-sans ">Orders</Link>
             )}
             {!localStorage.getItem('authToken') ? (
               <>
@@ -88,7 +93,7 @@ export default function Navbar() {
             ) : (
               <>
                 <button className="relative block text-lg text-white border border-white rounded-lg px-4 py-2 hover:bg-white hover:text-gray-900 transition-all duration-300" onClick={handleCartClick}>
-                  My Cart
+                    <AddShoppingCartIcon />Cart
                   {cartData.length > 0 && (
                     <span className="absolute top-0 right-0 -mt-2 -mr-2 bg-red-600 text-white rounded-full h-6 w-6 flex items-center justify-center">
                       {cartData.length}
