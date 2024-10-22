@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import Navbar from '../component/Navbar';
-import Footer from '../component/Footer';
+import Navbar from '../Component/Navbar';
+import Footer from '../Component/Footer';
 import axios from 'axios';
 
 export default function Signup() {

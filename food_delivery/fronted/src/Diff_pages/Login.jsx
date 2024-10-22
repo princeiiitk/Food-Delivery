@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import Navbar from '../component/Navbar'
-import Footer from '../component/Footer'
+import Navbar from '../Component/Navbar'
+import Footer from '../Component/Footer'
 import { Email, Lock } from '@mui/icons-material';
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios';

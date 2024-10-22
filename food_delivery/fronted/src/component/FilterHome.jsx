@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import FilterSidebar from './FilterSidebar'
-import Cards from '../component/Cards';
+import Cards from '../Component/Cards';
 import axios from 'axios';
 export default function FilterHome() {
   

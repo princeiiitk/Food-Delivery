@@ -1,9 +1,9 @@
 
-import Navbar from '../component/Navbar';
-import Footer from '../component/Footer';
-import Carousal from '../component/Carousal';
-import WithoutFilterHome from '../component/WithoutFilterHome';
-import WithFilter from '../component/FilterHome';
+import Navbar from '../Component/Navbar';
+import Footer from '../Component/Footer';
+import Carousal from '../Component/Carousal';
+import WithoutFilterHome from '../Component/WithoutFilterHome';
+import WithFilter from '../Component/FilterHome';
 import { useSelector } from 'react-redux';
 
 
