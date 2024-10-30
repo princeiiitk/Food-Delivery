@@ -13,7 +13,8 @@ export default function Cart() {
     const handleCheckout = async () => {
         try {
             const userEmail = localStorage.getItem('useremail');
-            const url = 'http://localhost:4000/OrderData';
+           
+            const url = `${process.env.REACT_APP_URL}/OrderData`
             const obj = { order_data: Cartdata, email: userEmail };
             const response = await axios.post(url, obj);
             

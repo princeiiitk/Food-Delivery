@@ -11,8 +11,7 @@ import { useSelector } from 'react-redux';
 export default function Home() {
   const FilterPrice = useSelector((state) => state.Filter?.filterprice)
   const FilterCategory = useSelector((state) => state.Filter?.foodcat)
-  console.log(FilterPrice,"opo")
-  console.log(FilterCategory,"ddd")
+ 
   return (
     <>
       <Navbar />

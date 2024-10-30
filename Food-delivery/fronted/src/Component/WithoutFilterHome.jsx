@@ -11,7 +11,9 @@ export default function WithoutFilterHome() {
 
     const fetchFoodData = async () => {
         try {
-            const url = 'http://localhost:4000/foodItems';
+           
+           
+            const url = `${process.env.REACT_APP_URL}/foodItems`
             const response = await axios.get(url);
             setFoodCategories(response.data[1]);
             setFoodItems(response.data[0]);

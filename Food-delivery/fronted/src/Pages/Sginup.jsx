@@ -15,7 +15,7 @@ export default function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const CreateAccount= { name: user.name, email: user.email, password: user.password, location: user.location };
-    const url = "http://localhost:4000/createuser";
+    const url = `${process.env.REACT_APP_URL}/createuser`;
 
     try {
       const response = await axios.post(url, CreateAccount);

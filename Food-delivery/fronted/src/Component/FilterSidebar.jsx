@@ -10,7 +10,7 @@ export default function Filter() {
     const [price, setPrice] = useState(0);
     const initialState = useSelector((state) => state.Filter?.foodcat)
 
-    console.log("filter----->", initialState)
+    
     const handlePriceChange = (e) => {
         const newPrice = parseInt(e.target.value);
         setPrice(newPrice);

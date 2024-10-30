@@ -23,7 +23,8 @@ export default function Login() {
    
     e.preventDefault();
     const UserAthu = { email: user.email, password: user.password }
-    const url = "http://localhost:4000/Login"
+    
+    const url = `${process.env.REACT_APP_URL}/Login`;
     const response = await axios.post(url, UserAthu)
 
     const Registeruser = response.data
