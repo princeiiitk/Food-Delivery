@@ -13,7 +13,7 @@ export default function Cart() {
     const handleCheckout = async () => {
         try {
             const userEmail = localStorage.getItem('useremail');
-            const url = 'https://fooddelivery-j1hz.onrender.com/OrderData';
+            const url = 'http://localhost:4000/OrderData';
             const obj = { order_data: Cartdata, email: userEmail };
             const response = await axios.post(url, obj);
             

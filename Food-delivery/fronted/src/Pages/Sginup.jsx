@@ -15,7 +15,7 @@ export default function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const CreateAccount= { name: user.name, email: user.email, password: user.password, location: user.location };
-    const url = "https://fooddelivery-j1hz.onrender.com/createuser";
+    const url = "http://localhost:4000/createuser";
 
     try {
       const response = await axios.post(url, CreateAccount);

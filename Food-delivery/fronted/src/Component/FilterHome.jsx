@@ -21,7 +21,7 @@ export default function FilterHome() {
   const fetchFoodData = async () => {
   
     try {
-      const url = 'https://fooddelivery-j1hz.onrender.com/foodItem';
+      const url = 'http://localhost:4000/foodItems';
       const response = await axios.get(url);
       setFoodCategories(response.data[1]);
       setFoodItems(response.data[0]);

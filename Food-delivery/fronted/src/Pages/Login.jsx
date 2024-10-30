@@ -20,10 +20,10 @@ export default function Login() {
 
 
   const handleSubmit = async (e) => {
-    console.log("hii")
+   
     e.preventDefault();
     const UserAthu = { email: user.email, password: user.password }
-    const url = "https://fooddelivery-j1hz.onrender.com/Login"
+    const url = "http://localhost:4000/Login"
     const response = await axios.post(url, UserAthu)
 
     const Registeruser = response.data

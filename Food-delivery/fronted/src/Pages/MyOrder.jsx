@@ -15,7 +15,7 @@ export default function MyOrder() {
         throw new Error('User email not found in local storage');
       }
 
-      const response = await axios.post('https://fooddelivery-j1hz.onrender.com/myOrder', { email: userEmail });
+      const response = await axios.post('http://localhost:4000/myOrder', { email: userEmail });
       setOrderData(response.data);
       setLoading(false);
     } catch (error) {
